@@ -1,0 +1,36 @@
+version: '3.5'
+
+services:
+  api:
+    build: 
+      context: .
+      target: prod
+    depends_on:
+      - database
+    restart: unless-stopped
+    environment:
+      APP_SECRET: ${APP_SECRET}
+      PUBLIC_ENTRYPOINT: https://${SERVER_NAME:-localhost}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-admin}:${POSTGRES_PASSWORD:-!ChangeMe!}@database:5432/${POSTGRES_DB:-cozy}
+      CLIENT_NAME: ${CLIENT_NAME:-homeassistant}
+      SOFTWARE_ID: ${SOFTWARE_ID:-ecolyohomemonitor}
+      OIDC_SERVER_URL: https://${SERVER_NAME:-localhost}/oidc/realms/cozy
+      OIDC_SERVER_URL_INTERNAL: http://caddy/oidc/realms/cozy # ???
+      OIDC_CLIENT_ID: ${OIDC_CLIENT_ID:-cozy-api}
+      OIDC_CLIENT_SECRET: ${OIDC_CLIENT_SECRET:-!ChangeMe!}
+
+  database:
+    image: postgres:${POSTGRES_VERSION:-15}-alpine
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB:-cozy}
+      # You should definitely change the password in production
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-!ChangeMe!}
+      - POSTGRES_USER=${POSTGRES_USER:-admin}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./docker/postgres/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      # you may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
+      # - ./etc/postgres/data:/var/lib/postgresql/data
+
+volumes:
+  db_data:

@@ -1,0 +1,24 @@
+{% extends "base.html" %} 
+{% block main %}
+  <div class="grid">
+    <section>
+      <h1>Create new client</h1>
+      <form method="post">
+        <!-- label -->
+        <label for="issuer">URL</label>
+        <!-- input -->
+        <input
+            type="url"
+            id="issuer"
+            name="issuer"
+            placeholder="https://example.cozygrandlyon.cloud"
+            required
+          />
+        <!-- error -->
+        {% if error %}<small>{{ error }}</small>{% endif %}
+        <!-- button -->
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+  </div>
+{% endblock %}

@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "cozy-enedis"
+version = "0.1.0"
+description = "Cozy client for home assistant"
+authors = ["herveGuigoz <herve.guigoz@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.103.1"
+pydantic = "^2.3.0"
+requests = "^2.31.0"
+sqlalchemy = "^2.0.20"
+uvicorn = "^0.23.2"
+shortuuid = "^1.0.11"
+passlib = "^1.7.4"
+python-jose = "^3.3.0"
+python-multipart = "^0.0.6"
+pydantic-settings = "^2.0.3"
+python-dotenv = "^1.0.0"
+jinja2 = "^3.1.2"
+pyjwt = "^2.8.0"
+fastapi-keycloak = "^1.0.10"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.9.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,16 @@
+**/.dockerignore
+**/.DS_Store
+**/.git/
+**/.gitattributes
+**/.gitignore
+**/.gitmodules
+**/docker-compose.*.yaml
+**/docker-compose.*.yml
+**/docker-compose.yaml
+**/docker-compose.yml
+**/Dockerfile
+.github/
+.vscode/
+docker/
+helm/
+.env

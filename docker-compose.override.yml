@@ -1,0 +1,21 @@
+version: '3.5'
+
+services:
+  api:
+    build: 
+      context: .
+      target: dev
+    volumes:
+      - ./app:/code/app:rw
+      - ./etc:/code/etc:rw
+    ports:
+      # HTTP
+      - target: 80
+        published: ${HTTP_PORT:-80}
+        protocol: tcp
+
+  database:
+    ports:
+      - target: 5432
+        published: 5432
+        protocol: tcp
